@@ -1,0 +1,19 @@
+@charset "UTF-8";
+/**
+ * 
+ * @authors Your Name (you@example.org)
+ * @date    2018-06-14 08:57:08
+ * @version $Id$
+ */
+.p-fontsize{font-size: 20px;}
+.margin-top-user{margin-top: 20px;}
+.btn-user{
+	margin: 100px;
+	width: 50%;
+	height: 150px;
+	font-size: 100px;
+}
+
+.span-select{
+	font-size: 100px;
+}

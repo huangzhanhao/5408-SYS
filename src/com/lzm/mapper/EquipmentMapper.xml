@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzm.mapper.EquipmentMapper" >
+  <resultMap id="BaseResultMap" type="com.lzm.pojo.Equipment" >
+    <id column="eq_id" property="eqId" jdbcType="INTEGER" />
+    <result column="eq_name" property="eqName" jdbcType="VARCHAR" />
+    <result column="eq_warehouse_id" property="eqWarehouseId" jdbcType="INTEGER" />
+    <result column="eq_class_id" property="eqClassId" jdbcType="INTEGER" />
+    <result column="eq_amount" property="eqAmount" jdbcType="INTEGER" />
+    <result column="eq_expand" property="eqExpand" jdbcType="INTEGER" />
+    			<result column="eq_surplus" property="eqSurplus" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="TempResultMap" type="com.lzm.pojo.EquipmentTemp" >
+    <id column="eq_id" property="eqId" jdbcType="INTEGER" />
+    <result column="eq_name" property="eqName" jdbcType="VARCHAR" />
+    <result column="eq_warehouse_name" property="eqWarehouseName" jdbcType="VARCHAR" />
+    <result column="eq_warehouse_address" property="eqWarehouseAdress" jdbcType="VARCHAR" />
+    <result column="eq_class_name" property="eqClassName" jdbcType="VARCHAR" />
+    <result column="eq_amount" property="eqAmount" jdbcType="INTEGER" />
+    <result column="eq_expand" property="eqExpand" jdbcType="INTEGER" />
+    			<result column="eq_surplus" property="eqSurplus" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    *
+    from equipment
+    where eq_id = #{eqId,jdbcType=INTEGER}
+  </select>
+  
+  
+  
+  <update id="updateByPrimaryKey" parameterType="com.lzm.pojo.Equipment" >
+    update equipment
+    set eq_name = #{eqName,jdbcType=VARCHAR},
+      eq_warehouse_id = #{eqWarehouseId,jdbcType=INTEGER},
+      eq_class_id = #{eqClassId,jdbcType=INTEGER}
+    where eq_id = #{eqId,jdbcType=INTEGER}
+  </update>
+  <select id="selectAllEquipment" resultMap="BaseResultMap" >
+  	select * from equipment
+  </select>
+  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap" >
+  	select * from equipment where eq_name like '%${value}%'
+  </select>
+  <select id="selectByPrimaryKeyTemp" parameterType="java.lang.Integer" resultMap="TempResultMap" >
+  	SELECT e.eq_id,e.eq_name,c.eq_class_name,w.eq_warehouse_name,w.eq_warehouse_address,e.eq_amount,e.eq_surplus,e.eq_expand 
+  	FROM equipment e 
+  	INNER JOIN eqclass c ON c.eq_class_id = e.eq_class_id 
+  	LEFT JOIN eqwarehouse w ON e.eq_warehouse_id=w.eq_warehouse_id
+  	where e.eq_id = #{v}
+  </select>
+</mapper>
