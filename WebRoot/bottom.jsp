@@ -6,16 +6,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>layout 后台大布局 - Layui</title>
-  <link rel="stylesheet" href="./layui/css/layui.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath }/layui/css/layui.css">
 </head>
 <body class="layui-layout-body">
-<div class="layui-layout layui-layout-admin">
-  <div class="layui-header">
-    <div class="layui-logo">体育馆管理员后台布局</div>
-    <ul class="layui-nav layui-layout-right">
-      <li class="layui-nav-item"><a href="">退出登录</a></li>
-    </ul>
+<div class="layui-footer">
+    <!-- 底部固定区域 -->
+    © gdou.com--广东海洋大学体育馆管理系统
   </div>
-</div>
 </body>
 </html>

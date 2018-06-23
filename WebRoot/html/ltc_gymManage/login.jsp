@@ -7,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>GDOU体育馆系统-登录</title>
-    <link rel="stylesheet" type="text/css" href="./layui/css/layui.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="./css/login.css" />
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/layui/css/layui.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/login.css" />
     <script type="text/javascript">
 		var msg="${error}";
 		if(msg!=""){
@@ -22,7 +22,7 @@
             <h1>广东海洋大学体育馆管理系统</h1>
         </header>
         <div class="beg-login-main">
-            <form action="${pageContext.request.contextPath}/loginChanger.action" class="layui-form" method="post">
+            <form action="#" class="layui-form" method="post">
                 <div class="layui-form-item">
                     <label class="beg-login-icon">
                         <i class="layui-icon">&#xe612;</i>
@@ -53,8 +53,8 @@
             <p>gdou-GYMsystem.com</p>
         </footer>
     </div>
-    <script type="text/javascript" src="./javascript/jquery.min.js"></script>
-    <script type="text/javascript" src="./layui/layui.js"></script>
-    <script type="text/javascript" src="./javascript/login.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath }/layui/layui.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath }/js/login.js"></script>
 </body>
 </html>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzm.mapper.EqclassMapper" >
+  <resultMap id="BaseResultMap" type="com.lzm.pojo.Eqclass" >
+    <id column="eq_class_id" property="eqClassId" jdbcType="INTEGER" />
+    <result column="eq_class_name" property="eqClassName" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap type="com.lzm.pojo.Eqclass" id="eqclass">
+         <id column="eq_class_id" property="eqClassId"/>
+         <result column="eq_class_name" property="eqClassName"/>
+         <!-- 一对多 -->
+         <collection property="equipment" ofType="Equipment">
+              <id column="eq_id" property="eqId" jdbcType="INTEGER" />
+    			<result column="eq_name" property="eqName" jdbcType="VARCHAR" />
+    			<result column="eq_warehouse_id" property="eqWarehouseId" jdbcType="INTEGER" />
+    			<result column="eq_class_id" property="eqClassId" jdbcType="INTEGER" />
+    			<result column="eq_amount" property="eqAmount" jdbcType="INTEGER" />
+    			<result column="eq_expand" property="eqExpand" jdbcType="INTEGER" />
+    			<result column="eq_surplus" property="eqSurplus" jdbcType="INTEGER" />
+         </collection>
+     </resultMap>
+     <select id="selectAllEqclass" resultMap="eqclass">
+         SELECT
+          c.*,e.*
+          FROM eqclass c
+          left join equipment e
+          on c.eq_class_id = e.eq_class_id
+     </select>
+     <select id="selectClassById" parameterType="java.lang.Integer" resultType="java.lang.String">
+         SELECT
+          eq_class_name
+          FROM eqclass where eq_class_id=#{v}
+     </select>
+</mapper>

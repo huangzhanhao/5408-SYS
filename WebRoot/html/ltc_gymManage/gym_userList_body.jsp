@@ -6,10 +6,32 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>layout 后台大布局 - Layui</title>
-  <link rel="stylesheet" href="./layui/css/layui.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath }/layui/css/layui.css">
+  <style>
+  #display{
+  	display:block;
+  }
+  </style>
 </head>
 <body class="layui-layout-body">
 
+	<div class="layui-layout layui-layout-admin"> 
+		<div class="layui-header">
+			<div><%@ include file="/head.jsp" %></div>
+		</div>
+		<div class="layui-side layui-bg-black">
+			    <div class="layui-side-scroll">
+			      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+			      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+			        <li class="layui-nav-item"><a  href="#">体育馆管理员控制台</a></li>
+			        <li class="layui-nav-item"><a href="ordinary_userList_body.jsp" >普通用户</a></li>
+			        <li class="layui-nav-item"><a href="gym_userList_body.jsp" class="layui-this" >管理员用户</a></li>
+			        <li class="layui-nav-item"><a href="call_board.jsp" >发布公告</a></li>
+			      </ul>
+			    </div>
+  		</div>
+  
+  		<div class="layui-body" id="mainBody">
     <!-- 内容主体区域 -->
     <div style="padding: 15px;">
         <fieldset class="layui-elem-field">
@@ -65,5 +87,13 @@
           </div>
       </fieldset>
     </div>
+    </div>
+    <div class="layui-footer">
+			<div><%@ include file="/bottom.jsp" %></div>
+		</div>
+		</div>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/layui/layui.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/index.js"></script>
 </body>
 </html>
