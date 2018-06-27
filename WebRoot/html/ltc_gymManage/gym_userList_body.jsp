@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+    pageEncoding="utf-8" import="java.util.*"%>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -35,33 +36,40 @@
     <!-- 内容主体区域 -->
     <div style="padding: 15px;">
         <fieldset class="layui-elem-field">
-            <legend>用户列表-体育馆用户</legend>
+            <legend>用户列表-体育馆用户
+            <button class="layui-btn layui-btn-normal layui-btn-sm dw-refresh" onclick="window.location.href='${pageContext.request.contextPath }/ltc_manage_query.action'"> <i class="layui-icon">&#x1002;</i>刷新</button>
+            </legend>
             <div class="layui-field-box">
                 <table class="layui-table">
                     <colgroup>
+                        <col width="100">
+                        <col width="100">
                         <col width="120">
-                        <col width="150">
-                        <col width="150">
-                        <col width="150">
+                        <col width="120">
+                        <col width="100">
                         <col>
                     </colgroup>
                     <thead>
                         <tr>
                         <th>姓名</th>
                         <th>员工号</th>
+                        <th>职位</th>
                         <th>注册时间</th>
                         <th>联系方式</th>
                         <th>备注</th>
                         </tr> 
                     </thead>
                     <tbody>
+                        <c:forEach var="user" items="${manageUserList }">
                         <tr>
-                        <td>贤心</td>
-                        <td>1239872313</td>
-                        <td>2016-11-29</td>
-                        <td>13420111121</td>
-                        <td>于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…</td>
+                        <td>${user.username }</td>
+                        <td>${user.controllerID }</td>
+                        <td>${user.status }</td>
+                        <td>${user.regTime }</td>
+                        <td>${user.contactWay }</td>
+                        <td>${user.remarks }</td>
                         </tr>
+                        </c:forEach>
                     </tbody>
                 </table>
             </div>
