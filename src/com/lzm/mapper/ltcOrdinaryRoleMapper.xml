@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzm.mapper.ltcOrdinaryRoleMapper" >
+
+	<insert id="addRole" parameterType="ltcOrdinaryRole">  
+        insert into ltc_ordinary_role(username,studentID,password,grade,college,sex) values(#{username},#{studentID},#{password},#{grade},#{college},#{sex})  
+    </insert> 
+    
+    <select id="queryOrdinaryRole" resultType="ltcOrdinaryRole">
+         select username,studentID,grade,college from ltc_ordinary_role
+     </select>
+     
+     <select id="queryManageRole" resultType="ltcManageRole">
+         select username,controllerID,status,regTime,contactWay,remarks from ltc_manage_role
+     </select>
+     
+     <insert id="addAnno" parameterType="callBoard">  
+        insert into call_board(anno) values(#{anno})  
+    </insert>
+    
+    <select id="queryAnno" resultType="callBoard">
+         select anno,createTime from call_board
+     </select>
+</mapper>

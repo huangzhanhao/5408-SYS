@@ -22,7 +22,7 @@
             <h1>广东海洋大学体育馆管理系统</h1>
         </header>
         <div class="beg-login-main">
-            <form action="#" class="layui-form" method="post">
+            <form action="${pageContext.request.contextPath }/ltc_tologin.action" class="layui-form" method="post">
                 <div class="layui-form-item">
                     <label class="beg-login-icon">
                         <i class="layui-icon">&#xe612;</i>
