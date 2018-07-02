@@ -71,22 +71,22 @@
 				cols: [
 					[{
 						field: 'idfield_order',
-						width: 120,
+						width: 150,
 						title: '订单编号',
 						sort: true
 					}, {
 						field: 'user_id',
-						width: 150,
+						width: 120,
 						title: '用户ID',
 						sort: true
 					}, {
 						field: 'idfield',
-						width: 100,
+						width: 120,
 						title: '场地编号',
 						sort: true
 					}, {
 						field: 'order_cost',
-						width: 120,
+						width: 100,
 						title: '订单金额'
 					}, {
 						field: 'order_date',

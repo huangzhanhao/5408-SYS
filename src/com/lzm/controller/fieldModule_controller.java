@@ -34,24 +34,40 @@ public class fieldModule_controller {
 		tableJSON.put("data", fieldList);
 		return tableJSON;
 	}
-	
+
 	// 管理员新增场地
 	@RequestMapping("/AddFieldAction.action")
-	public String InsertFieldControl(field field,Model model){
+	public String InsertFieldControl(field field, Model model) {
 		System.out.println(field.toString());
 		fieldService.addFieldService(field);
 		return "/html/hzh_gymManage/FieldList";
 	}
-	
-	//管理员修改场地信息
+
+	// 管理员修改场地信息
 	@RequestMapping("/editFieldAction.action")
-	public String EditFieldControl(field field,Model model){
+	public String EditFieldControl(field field, int idfield_old, Model model) {
 		System.out.println(field.toString());
+		System.out.println(idfield_old);
+		fieldService.editFieldService(idfield_old, field.getIdfield(), field.getField_type(), field.getField_location(),
+				field.getField_describe(), field.getField_capacity(), field.getField_rental(), field.getField_status());
 		return "/html/hzh_gymManage/FieldList";
 	}
-	
 
-	// 查询所有场地受损记录	
+	// 管理员删除场地
+	@RequestMapping("/delFieldAction.action")
+	public String DelFieldControl(int idfield, Model model) {
+		System.out.println(idfield);
+		try {
+			fieldService.deleteFieldService(idfield);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("主键无法删除");
+		}
+		return "/html/hzh_gymManage/FieldList";
+	}
+
+	// 查询所有场地受损记录
 	@RequestMapping("/QueryFieldDamageAction.action")
 	@ResponseBody
 	public Map QueryFieldDamageControl2(Model model) {
@@ -65,11 +81,40 @@ public class fieldModule_controller {
 		return tableJSON;
 	}
 
+	// 新增场地受损记录
+	@RequestMapping("/AddFieldDamageAction.action")
+	public String InsertFieldDamageControl(field_damage field_damage, Model model) {
+		System.out.println(field_damage.toString());
+		try {
+			fieldService.addFieldDamageService(field_damage);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "/html/hzh_gymManage/FieldDamageList";
+	}
+
+	// 修改场地受损记录
+	@RequestMapping("/EditFieldDamageAction.action")
+	public String EditInsertFieldDamageControl(field_damage field_damage, Model model) {
+		System.out.println(field_damage.toString());
+		fieldService.editFieldDamageService(field_damage);
+		return "/html/hzh_gymManage/FieldDamageList";
+	}
+
+	// 删除场地受损记录
+	@RequestMapping("/delFieldDamageAction.action")
+	public String DelFieldDamageControl(int idfield_damage, Model model){
+		System.out.println(idfield_damage);
+		fieldService.deleteFieldDamageService(idfield_damage);
+		return "/html/hzh_gymManage/FieldDamageList";
+	}
+	
 	// 查询所有订单
 	@RequestMapping("/QueryFieldOrderAction.action")
 	@ResponseBody
 	public Map QueryFieldOrderControl(Model model) {
-		List<field_order> orderList = fieldService.getFieldOrderListService();		
+		List<field_order> orderList = fieldService.getFieldOrderListService();
 		model.addAttribute("orderList", orderList);
 		Map tableJSON = new HashMap();
 		tableJSON.put("code", 0);

@@ -41,9 +41,34 @@ public class fieldModuleImpl implements fieldModuleService{
 	}
 
 	@Override
-	public void editFieldService(field field) {
+	public void editFieldService(int idfield_old, int idfield, String field_type, String field_location,
+			String field_describe, String field_capacity, String field_rental, String field_status) {
 		// TODO Auto-generated method stub
-		
+		fieldMapper.updatefield(idfield_old, idfield, field_type, field_location, field_describe, field_capacity, field_rental, field_status);
+	}
+
+	@Override
+	public void addFieldDamageService(field_damage field_damage) {
+		// TODO Auto-generated method stub
+		fieldMapper.insertfield_damage(field_damage);
+	}
+
+	@Override
+	public void editFieldDamageService(field_damage field_damage) {
+		// TODO Auto-generated method stub
+		fieldMapper.updatefield_damage(field_damage);
+	}
+
+	@Override
+	public void deleteFieldService(int idfield) {
+		// TODO Auto-generated method stub
+		fieldMapper.deletefield(idfield);
+	}
+
+	@Override
+	public void deleteFieldDamageService(int idfield_damage) {
+		// TODO Auto-generated method stub
+		fieldMapper.deletefield_damage(idfield_damage);
 	}
 
 }

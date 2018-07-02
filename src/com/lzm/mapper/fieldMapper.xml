@@ -8,12 +8,26 @@
 	</select>
 
 	<insert id="insertfield" parameterType="field">
-	INSERT INTO
-	field(field_type,field_location,field_describe,field_capacity,field_rental,field_status)
-	values(#{field_type},#{field_location},#{field_describe},#{field_capacity},#{field_rental},#{field_status})
+		INSERT INTO
+		field(field_type,field_location,field_describe,field_capacity,field_rental,field_status)
+		values(#{field_type},#{field_location},#{field_describe},#{field_capacity},#{field_rental},#{field_status})
 	</insert>
-	
-	<update id="updatefield" parameterType="field"></update>
+
+	<update id="updatefield">
+		update field set 
+		idfield = #{idfield},
+		field_type = #{field_type},
+		field_location = #{field_location},
+		field_describe = #{field_describe},
+		field_capacity = #{field_capacity},
+		field_rental = #{field_rental},
+		field_status = #{field_status}
+		where idfield = #{idfield_old}
+	</update>
+
+	<delete id="deletefield">
+		delete from field where idfield = #{idfield}
+	</delete>
 
 	<select id="selectAllfield_damage" resultType="field_damage">
 		SELECT
@@ -23,6 +37,24 @@
 		damage_describe
 		FROM field_damage;
 	</select>
+	
+	<insert id="insertfield_damage" parameterType="field_damage">
+		INSERT INTO
+		field_damage(idfield,damage_time,damage_describe)
+		values(#{field_damage_idfield},#{damage_time},#{damage_describe})
+	</insert>
+	
+	<update id="updatefield_damage" parameterType="field_damage">
+		update field_damage set
+		idfield = #{field_damage_idfield},
+		damage_time = #{damage_time},
+		damage_describe = #{damage_describe}
+		where idfield_damage = #{idfield_damage}
+	</update>
+	
+	<delete id="deletefield_damage">
+		delete from field_damage where idfield_damage = #{idfield_damage}
+	</delete>
 
 	<select id="selectAllfield_order" resultType="field_order">
 		SELECT *

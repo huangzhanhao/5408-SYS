@@ -40,15 +40,15 @@
 				<fieldset class="layui-elem-field">
 					<legend>场地列表</legend>
 					<div class="layui-field-box">
-						<button class="layui-btn" id="addfield-btn">新增场地</button>
+						<button class="layui-btn" id="addField-btn">新增场地</button>
 						<table class="layui-table" id="FieldListTable" lay-filter="tablefilter"></table>
 					</div>
 				</fieldset>
 				
 				<!-- 新增场地的弹出框 -->
-				<fieldset class="layui-elem-field" id="addfieldouter" style="display: none">
+				<fieldset class="layui-elem-field" id="addFieldouter" style="display: none">
 					<div class="layui-field-box">
-						<form class="layui-form" lay-filter="addfieldForm" method="post" action="${pageContext.request.contextPath }/AddFieldAction.action">
+						<form class="layui-form" method="post" action="${pageContext.request.contextPath }/AddFieldAction.action">
 							<div class="layui-form-item">
 								<label class="layui-form-label">场地类型：</label>
 								<div class="layui-input-inline">
@@ -91,7 +91,7 @@
 							</div>
 							<div class="layui-form-item">
 								<div class="layui-input-block">
-									<button class="layui-btn" lay-submit lay-filter="addfieldSubmit" >立即提交</button>
+									<button class="layui-btn" lay-submit lay-filter="addFieldSubmit" >立即提交</button>
 									<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 								</div>
 							</div>
@@ -100,13 +100,14 @@
 				</fieldset>
 
 				<!-- 修改场地的弹出框 -->
-				<fieldset class="layui-elem-field" id="editfieldouter" style="display: none">
+				<fieldset class="layui-elem-field" id="editFieldouter" style="display: none">
 					<div class="layui-field-box">
-						<form class="layui-form" lay-filter="editfieldForm" method="post" action="${pageContext.request.contextPath }/editFieldAction.action">
+						<form class="layui-form" method="post" action="${pageContext.request.contextPath }/editFieldAction.action">
 							<div class="layui-form-item">
 								<label class="layui-form-label">场地ID：</label>
 								<div class="layui-input-inline">
-									<input type="text" name="idfield" value="1" class="layui-input">
+									<input type="text" name="idfield" class="layui-input">
+									<input type="text" name="idfield_old" class="layui-input layui-hide">
 								</div>
 								<div class="layui-form-mid layui-word-aux">必填</div>
 							</div>
@@ -152,13 +153,19 @@
 							</div>
 							<div class="layui-form-item">
 								<div class="layui-input-block">
-									<button class="layui-btn" lay-submit lay-filter="editfieldSubmit">立即提交</button>
+									<button class="layui-btn" lay-submit lay-filter="editFieldSubmit">立即提交</button>
 									<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 								</div>
 							</div>
 						</form>
 					</div>
-				</fieldset>		
+				</fieldset>
+
+				<!-- 通过提交表单删除行 -->
+				<form class="layui-form layui-hide" id="delFieldForm" method="post"
+					action="${pageContext.request.contextPath }/delFieldAction.action">
+					<input type="text" name="idfield" class="layui-input">
+				</form>
 			</div>
 		</div>
 		<div class="layui-footer">
@@ -237,7 +244,8 @@
 					layer.msg(JSON.stringify(data));
 					console.log(JSON.stringify(data));
 				} else if (obj.event === 'edit') {	
-					var editform = $('#editfieldouter');
+					var editform = $('#editFieldouter');
+					var input_idfield_old = editform.find("[name='idfield_old']").attr("value",data.idfield);
 					var input_idfield = editform.find("[name='idfield']").attr("value",data.idfield);
 					var input_field_type = editform.find("[name='field_type']").attr("value",data.field_type);
 					var input_field_location = editform.find("[name='field_location']").attr("value",data.field_location);
@@ -249,9 +257,9 @@
 						type: 1,
 						title: "修改场地",
 						area: ['440px', '500px'], //宽高
-						content: $("#editfieldouter").html(),
+						content: $("#editFieldouter").html(),
 						success: function(layero, index){
-							console.log(input_field_type[0]);
+							console.log(input_idfield_old[0]);
 							console.log(layero, index);
 						}
 					})
@@ -259,17 +267,21 @@
 					layer.confirm('真的删除行么', function(index) {
 						obj.del();
 						layer.close(index);
+						var delform = $('#delFieldForm');
+						var input_idfield = delform.find("[name='idfield']").attr("value",data.idfield);
+						delform.submit();
+						console.log(delform);
 					});
 				}
 			});
 			
 			//按钮事件，调用弹出框
-			$("#addfield-btn").click(function () {			
+			$("#addField-btn").click(function () {			
 				layer.open({
 					type: 1,
 					title: "新增场地",
 					area: ['400px', '480px'], //宽高
-					content: $("#addfieldouter").html()
+					content: $("#addFieldouter").html()
 				})
 				//表格重载
 				table.reload('testReload', { 
@@ -284,10 +296,10 @@
 				});
 			});
 	
-			form.on('submit(addfieldSubmit)',function(formfield){
+			form.on('submit(addFieldSubmit)',function(formfield){
 				return "FieldList.jsp";
 			});
-			form.on('submit(editfieldSubmit)',function(formfield){
+			form.on('submit(editFieldSubmit)',function(formfield){
 				return "FieldList.jsp";
 			});
 		});

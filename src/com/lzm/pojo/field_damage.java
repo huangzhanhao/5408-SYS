@@ -46,4 +46,10 @@ public class field_damage {
 	public void setField(field field) {
 		this.field = field;
 	}
+
+	@Override
+	public String toString() {
+		return "field_damage [idfield_damage=" + idfield_damage + ", field_damage_idfield=" + field_damage_idfield
+				+ ", damage_time=" + damage_time + ", damage_describe=" + damage_describe + ", field=" + field + "]";
+	}
 }
