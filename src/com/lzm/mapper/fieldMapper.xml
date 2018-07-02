@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzm.mapper.fieldMapper">
+
+	<select id="selectAllfield" resultType="field">
+		SELECT *
+		FROM field;
+	</select>
+
+	<insert id="insertfield" parameterType="field">
+	INSERT INTO
+	field(field_type,field_location,field_describe,field_capacity,field_rental,field_status)
+	values(#{field_type},#{field_location},#{field_describe},#{field_capacity},#{field_rental},#{field_status})
+	</insert>
+	
+	<update id="updatefield" parameterType="field"></update>
+
+	<select id="selectAllfield_damage" resultType="field_damage">
+		SELECT
+		idfield_damage,
+		idfield as field_damage_idfield,
+		damage_time,
+		damage_describe
+		FROM field_damage;
+	</select>
+
+	<select id="selectAllfield_order" resultType="field_order">
+		SELECT *
+		FROM
+		field_order;
+	</select>
+
+</mapper>
