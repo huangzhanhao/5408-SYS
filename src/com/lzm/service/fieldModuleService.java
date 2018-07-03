@@ -35,4 +35,7 @@ public interface fieldModuleService {
 
 	// 管理员查看场地的订单记录
 	public List<field_order> getFieldOrderListService();
+	
+	//用户预约场地
+	public void reserveFieldService(field_order field_order);
 }

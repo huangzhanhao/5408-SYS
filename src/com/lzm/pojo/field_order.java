@@ -73,4 +73,11 @@ public class field_order {
 	public void setOrder_status(String order_status) {
 		this.order_status = order_status;
 	}
+
+	@Override
+	public String toString() {
+		return "field_order [idfield_order=" + idfield_order + ", user_id=" + user_id + ", idfield=" + idfield
+				+ ", order_cost=" + order_cost + ", order_date=" + order_date + ", order_begin=" + order_begin
+				+ ", order_end=" + order_end + ", order_status=" + order_status + "]";
+	}
 }

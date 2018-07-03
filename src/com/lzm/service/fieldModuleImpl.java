@@ -71,4 +71,10 @@ public class fieldModuleImpl implements fieldModuleService{
 		fieldMapper.deletefield_damage(idfield_damage);
 	}
 
+	@Override
+	public void reserveFieldService(field_order field_order) {
+		// TODO Auto-generated method stub
+		fieldMapper.reservefield(field_order);
+	}
+
 }

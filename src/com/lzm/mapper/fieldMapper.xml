@@ -61,5 +61,11 @@
 		FROM
 		field_order;
 	</select>
+	
+	<insert id="reservefield" parameterType="field_order">
+		INSERT INTO
+		field_order(user_id,idfield,order_cost,order_date,order_begin,order_end,order_status)
+		values(#{user_id},#{idfield},#{order_cost},#{order_date},#{order_begin},#{order_end},#{order_status})
+	</insert>
 
 </mapper>

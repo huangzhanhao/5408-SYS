@@ -123,4 +123,13 @@ public class fieldModule_controller {
 		tableJSON.put("data", orderList);
 		return tableJSON;
 	}
+	
+	//用户预约场地
+	@RequestMapping("/ReserveAction.action")
+	public String ReserveControl(field_order field_order,Model model){
+		field_order.setOrder_status("未支付");
+		System.out.println(field_order.toString());
+		fieldService.reserveFieldService(field_order);
+		return "/html/hzh_gymManage/returnsuccess";
+	}
 }

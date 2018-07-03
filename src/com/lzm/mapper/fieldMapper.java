@@ -39,4 +39,7 @@ public interface fieldMapper {
 	
 	// 查询所有订单
 	List<field_order> selectAllfield_order();
+	
+	//预约场地
+	void reservefield(field_order field_order);
 }
