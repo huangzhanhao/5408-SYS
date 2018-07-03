@@ -8,6 +8,6 @@
 </head>
 <body>
 	<button onclick="${pageContext.request.contextPath }/ltc_ordinary_query.action">测试查询普通用户</button>
-	<a href="${pageContext.request.contextPath }/ltc_ordinary_query.action">测试查询普通用户</a>
+	<a href="${pageContext.request.contextPath }/query.action">测试查询普通用户</a>
 </body>
 </html>
