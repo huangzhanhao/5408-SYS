@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzm.mapper.SSGL_Mapper">
+
+
+
+<update id="SSXG_CDsign"  parameterType="lth_SSGL">
+   update cd set CDsign= 0 where CDid =#{id2}
+</update>
+<update id="SSXG_QCsign" parameterType="lth_SSGL">
+   update qc set QCsign= 0 where QCid= #{id1}
+</update>
+
+
+
+<update id="SSSH_bohui" parameterType="lth_SSGL">
+   update SS set shenhebiaoji= 2 where shenqingren= #{shenqingren}
+</update>
+	<select id="SSCX" resultType="lth_SSGL">
+	SELECT * FROM ss WHERE zhifubiaoji =1 and yonghucaozuo = 0
+	</select>
+
+
+	<select id="YH_XG" resultType="lth_SSGL">
+		SELECT * FROM ssd  WHERE shenqingren= #{shenqingren,jdbcType=VARCHAR}
+	</select>
+	
+	
+	
+	<select id="SSCX_1" resultType="lth_SSGL">
+		SELECT * FROM ss WHERE zhifubiaoji =1 and  = 0
+	</select>
+<select id="SSSH_chaxun" resultType="lth_SSGL">
+		select * from ss where shenhebiaoji= 0  or yonghucaozuo !=0
+	</select>   
+	<select id="SH" resultType="lth_SSGL">
+		SELECT * FROM ss WHERE shenhebiaoji!=0 AND zhifubiaoji=0
+	</select>   
+	
+	
+<select id="SSXG_chaxun" resultType="lth_SSGL">
+		select * from ss where shenqingren= #{shenqingren,jdbcType=VARCHAR}
+	</select>
+<update id="SSXG"  parameterType="lth_SSGL">
+   UPDATE ss SET QCid=( SELECT QCid FROM qc WHERE QCname = #{qicai}),CDid=(SELECT CDid FROM cd WHERE CDname = #{changdi}),shenqingren=#{shenqingren},kaishishijian=#{kaishishijian},jieshushijian=#{jieshushijian},shenqingriqi=#{shenqingriqi},qicai=#{qicai},changdi=#{changdi} 
+   WHERE shenqingren = #{shenqingren}
+</update>
+
+<update id="CDQC_CDsign"  parameterType="lth_SSGL">
+   update cd set CDsign= 1 where CDname = #{changdi}
+</update>
+
+<update id="SSSH_tongyi"  parameterType="lth_SSGL">
+   update ss set shenhebiaoji= 1 where shenqingren = #{shenqingren,jdbcType=VARCHAR}
+</update>
+<update id="CDQC_QCsign" parameterType="lth_SSGL">
+   update qc set QCsign= 1 where QCname= #{qicai}
+</update>
+
+
+<update id="zhifu"  parameterType="lth_SSGL">
+   update ss set dingdanjine=#{dingdanjine},zhifubiaoji=1 where shenqingren = #{shenqingren,jdbcType=VARCHAR}
+</update>
+<update id="YH_caozuo"  parameterType="lth_SSGL">
+   update ss set yonghucaozuo=1 where shenqingren = #{shenqingren,jdbcType=VARCHAR}
+</update>
+
+
+
+	<insert id="SSSQ" parameterType="lth_SSGL">
+		insert into
+		ss(shenqingren,kaishishijian,jieshushijian,shenqingriqi,qicai,changdi,CDid,QCid,zhifubiaoji,CDmoney,QCmoney,shenhebiaoji,yonghucaozuo)
+		values(#{shenqingren},#{kaishishijian},#{jieshushijian},#{shenqingriqi},#{qicai},#{changdi},(SELECT CDid FROM cd WHERE CDname = #{changdi}),( SELECT QCid FROM qc WHERE QCname = #{qicai}),0,(SELECT CDmoney FROM cd WHERE CDname = #{changdi}),(SELECT QCmoney FROM qc WHERE QCname = #{qicai}),0,0)
+	</insert>
+	
+	<insert id="YH_TY" parameterType="lth_SSGL">
+		insert into
+		ss(shenqingren,kaishishijian,jieshushijian,shenqingriqi,qicai,changdi,CDid,QCid,zhifubiaoji,CDmoney,QCmoney,shenhebiaoji,yonghucaozuo)
+		values(#{shenqingren},#{kaishishijian},#{jieshushijian},#{shenqingriqi},#{qicai},#{changdi},(SELECT CDid FROM cd WHERE CDname = #{changdi}),( SELECT QCid FROM qc WHERE QCname = #{qicai}),0,(SELECT CDmoney FROM cd WHERE CDname = #{changdi}),(SELECT QCmoney FROM qc WHERE QCname = #{qicai}),1,0)
+	</insert>
+	
+	<insert id="SSSQ_1" parameterType="lth_SSGL">
+		insert into
+		ssd (shenqingren,kaishishijian,jieshushijian,shenqingriqi,qicai,changdi,CDid,QCid,zhifubiaoji,CDmoney,QCmoney,shenhebiaoji,yonghucaozuo)
+		values(#{shenqingren},#{kaishishijian},#{jieshushijian},#{shenqingriqi},#{qicai},#{changdi},(SELECT CDid FROM cd WHERE CDname = #{changdi}),( SELECT QCid FROM qc WHERE QCname = #{qicai}),0,(SELECT CDmoney FROM cd WHERE CDname = #{changdi}),(SELECT QCmoney FROM qc WHERE QCname = #{qicai}),0,0)
+	</insert>
+
+
+<delete id="SSXG_del" parameterType="lth_SSGL">
+delete from ss where shenqingren = #{shenqingren,jdbcType=VARCHAR}
+</delete>
+
+	<select id="CDQC_1" resultType="lth_qc">
+		select QCname from qc where QCsign = 0
+	</select>
+
+	<select id="CDQC_2" resultType="lth_cd">
+		select CDname from cd where CDsign = 0
+	</select>
+
+</mapper>
