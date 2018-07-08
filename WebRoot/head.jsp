@@ -15,7 +15,7 @@
 		<div class="layui-header">
 			<div class="layui-logo">体育馆管理员后台布局</div>
 			<ul class="layui-nav layui-layout-right">
-				<li class="layui-nav-item"><a href="">退出登录</a></li>
+				<li class="layui-nav-item"><a href="${pageContext.request.contextPath }/html/ltc_gymManage/login.jsp">退出登录</a></li>
 			</ul>
 		</div>
 	</div>

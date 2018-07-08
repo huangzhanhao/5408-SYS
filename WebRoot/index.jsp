@@ -17,6 +17,7 @@
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="This is my page">
+<!--<link rel="stylesheet" type="text/css" href="styles.css">-->
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath }/css/equipment-index-user.css">
 <link rel="stylesheet" type="text/css"
@@ -45,7 +46,7 @@
 	</div>
 	</nav>
 
-	<div class="container-fluid">
+	<div class="container">
 		<div class="row">
 			<div class="col-md-7 col-md-offset-1">
 				<!--轮播块-->
@@ -60,16 +61,19 @@
 					<!-- 轮播（Carousel）项目 -->
 					<div class="carousel-inner">
 						<div class="item active">
-							<img src="img/slide1.png" class="img-responsive"
-								alt="First slide">
+							<img
+								src="${pageContext.request.contextPath }/img/carousel-1.png"
+								class="img-responsive center-block" alt="First slide">
 						</div>
 						<div class="item">
-							<img src="img/slide2.png" class="img-responsive"
-								alt="Second slide">
+							<img
+								src="${pageContext.request.contextPath }/img/carousel-2.png"
+								class="img-responsive center-block" alt="Second slide">
 						</div>
 						<div class="item">
-							<img src="img/slide3.png" class="img-responsive"
-								alt="Third slide">
+							<img
+								src="${pageContext.request.contextPath }/img/carousel-3.png"
+								class="img-responsive center-block" alt="Third slide">
 						</div>
 					</div>
 					<!-- 轮播（Carousel）导航 -->
@@ -107,15 +111,13 @@
 		</div>
 		<div class="row">
 			<div class="col-md-4">
-				<button type="button" class="btn btn-primary btn-user">场地系统</button>
+				<button type="button" class="btn btn-primary btn-user" onclick="window.location.href='${pageContext.request.contextPath }/html/hzh_gymManage/Field-index-user.jsp'">场地系统</button>
 			</div>
 			<div class="col-md-4">
-				<button type="button" class="btn btn-success btn-user"
-					onclick="window.location.href='${pageContext.request.contextPath }/html/equipment-index-user.jsp'">器材系统</button>
+				<button type="button" class="btn btn-success btn-user" onclick="window.location.href='${pageContext.request.contextPath }/html/lzm_gymManage/equipment-index-user.jsp'">器材系统</button>
 			</div>
 			<div class="col-md-4">
-				<button type="button" class="btn btn-warning btn-user"
-					onclick="window.location.href='${pageContext.request.contextPath }/html/lth_gymManage/YH_SSGL.jsp'">赛事系统</button>
+				<button type="button" class="btn btn-warning btn-user" onclick="window.location.href='${pageContext.request.contextPath }/html/lth_gymManage/YH_SSGL.jsp'">赛事系统</button>
 			</div>
 		</div>
 	</div>
