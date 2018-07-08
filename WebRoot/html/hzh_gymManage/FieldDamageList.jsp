@@ -32,6 +32,9 @@
 					<li class="layui-nav-item">
 						<a href="${pageContext.request.contextPath }/html/hzh_gymManage/FieldOrderList.jsp">订单记录</a>
 					</li>
+					<li class="layui-nav-item">
+						<a href="${pageContext.request.contextPath }/html/ltc_gymManage/gym_userList_body.jsp">发布公告</a>
+					</li>
 				</ul>
 			</div>
 		</div>

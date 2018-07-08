@@ -1,5 +1,5 @@
 .beg-login-bg {
-	background: rgba(0, 0, 0, 0) url("./../img/login_home_background.jpg") no-repeat fixed center center / cover ;
+	background: rgba(0, 0, 0, 0) url("../image/login_home_background.jpg") no-repeat fixed center center / cover ;
 	background-color: #393D49;
 	height: auto;
 }

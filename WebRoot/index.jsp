@@ -1,7 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -15,28 +17,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="This is my page">
-<!--<link rel="stylesheet" type="text/css" href="styles.css">-->
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/equipment-index-user.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/bootstrap.css">
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath }/css/equipment-index-user.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath }/css/bootstrap.css">
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/js/jquery.min.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/js/bootstrap.js"></script>
 </head>
 
 <body>
 	<nav class="navbar navbar-default">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="#">海大体育馆管理系统</a>
-		</div>
-		<div>
-			<ul class="nav navbar-nav">
-				<li><a href="#">场地系统</a></li>
-				<li><a href="#">器材系统</a></li>
-				<li><a href="#">赛事系统</a></li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">个人中心</a></li>
-			</ul>
-		</div>
+	<div class="navbar-header">
+		<a class="navbar-brand" href="#">海大体育馆管理系统</a>
+	</div>
+	<div>
+		<ul class="nav navbar-nav">
+			<li><a href="#">场地系统</a></li>
+			<li><a href="#">器材系统</a></li>
+			<li><a href="#">赛事系统</a></li>
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+			<li><a
+				href="${pageContext.request.contextPath }/ltc_ordinary_queryByIDInHomepage.action?studentID=${userList.studentID}">个人中心</a></li>
+		</ul>
+	</div>
 	</nav>
 
 	<div class="container-fluid">
@@ -83,15 +89,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h5>最新公告</h5>
+						<a
+							href="${pageContext.request.contextPath }//ltc_anno_queryInHomepage.action">刷新</a>
 					</div>
-					<div class="panel-body"></div>
+					<div class="panel-body">
+						<table>
+							<c:forEach var="anno" items="${annoList }">
+								<tr>
+									<td>${anno.anno }</td>
+									<td>${anno.createTime }</td>
+								</tr>
+							</c:forEach>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
 		<div class="row">
-		<div class="col-md-4"><button type="button" class="btn btn-primary btn-user">场地系统</button></div>
-		<div class="col-md-4"><button type="button" class="btn btn-success btn-user">器材系统</button></div>
-		<div class="col-md-4"><button type="button" class="btn btn-warning btn-user">赛事系统</button></div>
+			<div class="col-md-4">
+				<button type="button" class="btn btn-primary btn-user">场地系统</button>
+			</div>
+			<div class="col-md-4">
+				<button type="button" class="btn btn-success btn-user"
+					onclick="window.location.href='${pageContext.request.contextPath }/html/equipment-index-user.jsp'">器材系统</button>
+			</div>
+			<div class="col-md-4">
+				<button type="button" class="btn btn-warning btn-user"
+					onclick="window.location.href='${pageContext.request.contextPath }/html/lth_gymManage/YH_SSGL.jsp'">赛事系统</button>
+			</div>
 		</div>
 	</div>
 

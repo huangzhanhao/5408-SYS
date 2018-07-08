@@ -5,71 +5,64 @@ package com.lzm.pojo;
  *
  */
 public class Equipment {
-    private Integer eqId;
-    private String eqName;
-    private Integer eqWarehouseId;
-    private Integer eqClassId;
-    private Integer eqAmount;
-    private Integer eqExpand;
-    private Integer eqSurplus;
-    
+	private Integer eqId;
+	private String eqName;
+	private Integer eqWarehouseId;
+	private Integer eqClassId;
+	private Integer eqAmount;
+	private Integer eqSurplus;
 
-    @Override
+	@Override
 	public String toString() {
-		return "Equipment [eqId=" + eqId + ", eqName=" + eqName
-				+ ", eqWarehouseId=" + eqWarehouseId + ", eqClassId="
-				+ eqClassId + ", eqAmount=" + eqAmount + ", eqExpand="
-				+ eqExpand + ", eqSurplus=" + eqSurplus + "]";
+		return "Equipment [eqId=" + eqId + ", eqName=" + eqName + ", eqWarehouseId=" + eqWarehouseId + ", eqClassId="
+				+ eqClassId + ", eqAmount=" + eqAmount + ", eqSurplus=" + eqSurplus + "]";
 	}
-	public Integer getEqExpand() {
-		return eqExpand;
-	}
-	public void setEqExpand(Integer eqExpand) {
-		this.eqExpand = eqExpand;
-	}
+
 	public Integer getEqSurplus() {
 		return eqSurplus;
 	}
+
 	public void setEqSurplus(Integer eqSurplus) {
 		this.eqSurplus = eqSurplus;
 	}
+
 	public Integer getEqAmount() {
 		return eqAmount;
 	}
+
 	public void setEqAmount(Integer eqAmount) {
 		this.eqAmount = eqAmount;
 	}
+
 	public Integer getEqId() {
-        return eqId;
-    }
-    public void setEqId(Integer eqId) {
-        this.eqId = eqId;
-    }
+		return eqId;
+	}
 
-    public String getEqName() {
-        return eqName;
-    }
+	public void setEqId(Integer eqId) {
+		this.eqId = eqId;
+	}
 
-    public void setEqName(String eqName) {
-        this.eqName = eqName == null ? null : eqName.trim();
-    }
+	public String getEqName() {
+		return eqName;
+	}
 
-    public Integer getEqWarehouseId() {
-        return eqWarehouseId;
-    }
+	public void setEqName(String eqName) {
+		this.eqName = eqName == null ? null : eqName.trim();
+	}
 
-    
+	public Integer getEqWarehouseId() {
+		return eqWarehouseId;
+	}
+
 	public void setEqWarehouseId(Integer eqWarehouseId) {
-        this.eqWarehouseId = eqWarehouseId;
-    }
+		this.eqWarehouseId = eqWarehouseId;
+	}
 
-    
+	public Integer getEqClassId() {
+		return eqClassId;
+	}
 
-    public Integer getEqClassId() {
-        return eqClassId;
-    }
-
-    public void setEqClassId(Integer eqClassId) {
-        this.eqClassId = eqClassId;
-    }
+	public void setEqClassId(Integer eqClassId) {
+		this.eqClassId = eqClassId;
+	}
 }

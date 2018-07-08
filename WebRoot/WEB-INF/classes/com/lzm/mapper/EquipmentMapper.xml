@@ -1,53 +1,265 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.lzm.mapper.EquipmentMapper" >
-  <resultMap id="BaseResultMap" type="com.lzm.pojo.Equipment" >
-    <id column="eq_id" property="eqId" jdbcType="INTEGER" />
-    <result column="eq_name" property="eqName" jdbcType="VARCHAR" />
-    <result column="eq_warehouse_id" property="eqWarehouseId" jdbcType="INTEGER" />
-    <result column="eq_class_id" property="eqClassId" jdbcType="INTEGER" />
-    <result column="eq_amount" property="eqAmount" jdbcType="INTEGER" />
-    <result column="eq_expand" property="eqExpand" jdbcType="INTEGER" />
-    <result column="eq_surplus" property="eqSurplus" jdbcType="INTEGER" />
-  </resultMap>
-  <resultMap id="TempResultMap" type="com.lzm.pojo.EquipmentTemp" >
-    <id column="eq_id" property="eqId" jdbcType="INTEGER" />
-    <result column="eq_name" property="eqName" jdbcType="VARCHAR" />
-    <result column="eq_warehouse_name" property="eqWarehouseName" jdbcType="VARCHAR" />
-    <result column="eq_warehouse_address" property="eqWarehouseAdress" jdbcType="VARCHAR" />
-    <result column="eq_class_name" property="eqClassName" jdbcType="VARCHAR" />
-    <result column="eq_amount" property="eqAmount" jdbcType="INTEGER" />
-    <result column="eq_expand" property="eqExpand" jdbcType="INTEGER" />
-    <result column="eq_surplus" property="eqSurplus" jdbcType="INTEGER" />
-  </resultMap>
-  
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    *
-    from equipment
-    where eq_id = #{eqId,jdbcType=INTEGER}
-  </select>
-  
-  
-  
-  <update id="updateByPrimaryKey" parameterType="com.lzm.pojo.Equipment" >
-    update equipment
-    set eq_name = #{eqName,jdbcType=VARCHAR},
-      eq_warehouse_id = #{eqWarehouseId,jdbcType=INTEGER},
-      eq_class_id = #{eqClassId,jdbcType=INTEGER}
-    where eq_id = #{eqId,jdbcType=INTEGER}
-  </update>
-  <select id="selectAllEquipment" resultMap="BaseResultMap" >
-  	select * from equipment
-  </select>
-  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap" >
-  	select * from equipment where eq_name like '%${value}%'
-  </select>
-  <select id="selectByPrimaryKeyTemp" parameterType="java.lang.Integer" resultMap="TempResultMap" >
-  	SELECT e.eq_id,e.eq_name,c.eq_class_name,w.eq_warehouse_name,w.eq_warehouse_address,e.eq_amount,e.eq_surplus,e.eq_expand 
-  	FROM equipment e 
-  	INNER JOIN eqclass c ON c.eq_class_id = e.eq_class_id 
-  	LEFT JOIN eqwarehouse w ON e.eq_warehouse_id=w.eq_warehouse_id
-  	where e.eq_id = #{v}
-  </select>
+<mapper namespace="com.lzm.mapper.EquipmentMapper">
+	<resultMap type="com.lzm.pojo.Eqclass" id="eqclass">
+		<id column="eq_class_id" property="eqClassId" />
+		<result column="eq_class_name" property="eqClassName" />
+		<!-- 一对多 -->
+		<collection property="equipment" ofType="Equipment">
+			<id column="eq_id" property="eqId" jdbcType="INTEGER" />
+			<result column="eq_name" property="eqName" jdbcType="VARCHAR" />
+			<result column="eq_warehouse_id" property="eqWarehouseId"
+				jdbcType="INTEGER" />
+			<result column="eq_class_id" property="eqClassId" jdbcType="INTEGER" />
+			<result column="eq_amount" property="eqAmount" jdbcType="INTEGER" />
+			<result column="eq_expand" property="eqExpand" jdbcType="INTEGER" />
+			<result column="eq_surplus" property="eqSurplus" jdbcType="INTEGER" />
+		</collection>
+	</resultMap>
+	<select id="selectAllEqclass" resultMap="eqclass">
+		SELECT
+		c.*,e.*
+		FROM eqclass c
+		left join equipment e
+		on c.eq_class_id = e.eq_class_id
+	</select>
+	<select id="selectAllEqmaintain" resultType="Eqmaintain">
+		SELECT * FROM eqmaintain
+	</select>
+	<resultMap type="com.lzm.pojo.Eqclass" id="eqclassSimple">
+		<id column="eq_class_id" property="eqClassId" />
+		<result column="eq_class_name" property="eqClassName" />
+	</resultMap>
+	<select id="selectClassById" parameterType="java.lang.Integer"
+		resultMap="eqclassSimple">
+		SELECT * FROM eqclass where eq_class_id=#{v}
+	</select>
+
+	<resultMap id="BaseResultMap1" type="com.lzm.pojo.Equipment">
+		<id column="eq_id" property="eqId" jdbcType="INTEGER" />
+		<result column="eq_name" property="eqName" jdbcType="VARCHAR" />
+		<result column="eq_warehouse_id" property="eqWarehouseId"
+			jdbcType="INTEGER" />
+		<result column="eq_class_id" property="eqClassId" jdbcType="INTEGER" />
+		<result column="eq_amount" property="eqAmount" jdbcType="INTEGER" />
+		<result column="eq_surplus" property="eqSurplus" jdbcType="INTEGER" />
+	</resultMap>
+	<resultMap id="TempResultMap" type="com.lzm.pojo.EquipmentTemp">
+		<id column="eq_id" property="eqId" jdbcType="INTEGER" />
+		<result column="eq_name" property="eqName" jdbcType="VARCHAR" />
+		<result column="eq_warehouse_name" property="eqWarehouseName"
+			jdbcType="VARCHAR" />
+		<result column="eq_warehouse_address" property="eqWarehouseAdress"
+			jdbcType="VARCHAR" />
+		<result column="eq_class_name" property="eqClassName" jdbcType="VARCHAR" />
+		<result column="eq_amount" property="eqAmount" jdbcType="INTEGER" />
+		<result column="eq_expand" property="eqExpand" jdbcType="INTEGER" />
+		<result column="eq_surplus" property="eqSurplus" jdbcType="INTEGER" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap1"
+		parameterType="java.lang.Integer">
+		select
+		*
+		from equipment
+		where eq_id = #{eqId,jdbcType=INTEGER}
+	</select>
+
+	<insert id="insertLease" parameterType="Eqrental">
+		insert into eqrental (eq_lease_id,
+		eq_id,eq_count,eq_charge,eq_date_rental,eq_date_return,eq_isreturn,eq_user_id,eq_staff_id)
+		values (#{eq_lease_id}, #{eq_id}, #{eq_count}, #{eq_charge},
+		#{eq_date_rental}, #{eq_date_return}, #{eq_isreturn}, #{eq_user_id},
+		#{eq_staff_id})
+	</insert>
+
+	<update id="updateByPrimaryKey" parameterType="com.lzm.pojo.Equipment">
+		update equipment
+		set eq_name = #{eqName,jdbcType=VARCHAR},
+		eq_warehouse_id = #{eqWarehouseId,jdbcType=INTEGER},
+		eq_class_id = #{eqClassId,jdbcType=INTEGER}
+		where eq_id = #{eqId,jdbcType=INTEGER}
+	</update>
+	<select id="selectAllEquipment" resultMap="BaseResultMap1">
+		select * from equipment
+	</select>
+	<select id="selectByName" parameterType="java.lang.String"
+		resultMap="BaseResultMap1">
+		select * from equipment where eq_name like '%${value}%'
+	</select>
+	<select id="selectByPrimaryKeyTemp" parameterType="java.lang.Integer"
+		resultMap="TempResultMap">
+		SELECT
+		e.eq_id,e.eq_name,c.eq_class_name,w.eq_warehouse_name,w.eq_warehouse_address,e.eq_amount,e.eq_surplus,e.eq_expand
+		FROM equipment e
+		INNER JOIN eqclass c ON c.eq_class_id = e.eq_class_id
+		LEFT JOIN eqwarehouse w ON e.eq_warehouse_id=w.eq_warehouse_id
+		where e.eq_id = #{v}
+	</select>
+	<select id="selectAllEquipmentTemp" resultMap="TempResultMap">
+		SELECT
+		e.eq_id,e.eq_name,c.eq_class_name,w.eq_warehouse_name,w.eq_warehouse_address,e.eq_amount,e.eq_surplus
+		FROM equipment e
+		INNER JOIN eqclass c ON c.eq_class_id = e.eq_class_id
+		LEFT JOIN eqwarehouse w ON e.eq_warehouse_id=w.eq_warehouse_id
+	</select>
+	<select id="selectEqspendByPrimaryKey" parameterType="java.lang.Integer"
+		resultType="Equipmentspend">
+		SELECT *
+		FROM equipmentspend
+		where eq_id = #{v}
+	</select>
+
+	<select id="selectCountById" parameterType="java.lang.Integer"
+		resultType="java.lang.Integer">
+		SELECT eq_surplus
+		FROM equipment
+		where eq_id = #{v}
+	</select>
+
+	<select id="selectRentalTempList" parameterType="java.lang.Integer"
+		resultType="EqrentalTemp">
+		SELECT r.eq_lease_id,r.eq_date_return,e.eq_name FROM eqrental r LEFT JOIN
+		equipment e ON r.eq_id=e.eq_id
+		where r.eq_user_id=#{v} and r.eq_isreturn = 0 and r.eq_staff_id is null
+	</select>
+	<select id="getEqreturnList" parameterType="java.lang.Integer"
+		resultType="EqreturnTemp">
+		SELECT r.eq_return_id,r.eq_return_date,r.eq_exam_state,e.eq_name FROM
+		eqreturn r LEFT JOIN equipment e ON r.eq_id=e.eq_id
+		where eq_user_id=#{v}
+	</select>
+	<select id="selectRentalById" parameterType="java.lang.String"
+		resultType="Eqrental">
+		SELECT * FROM eqrental where eq_lease_id=#{v} and eq_isreturn = 1
+	</select>
+	<select id="selectAllEqrental" resultType="EqrentalTempMa">
+		SELECT
+		r.eq_lease_id,e.eq_name,r.eq_count,r.eq_date_rental,r.eq_date_return,r.eq_user_id
+		FROM eqrental r LEFT JOIN equipment e ON r.eq_id=e.eq_id
+		where r.eq_staff_id is null
+	</select>
+	<select id="selectAllEqrentalIsDone" resultType="EqrentalTempMa">
+		SELECT
+		r.eq_lease_id,e.eq_name,r.eq_count,r.eq_date_rental,r.eq_date_return,r.eq_user_id
+		FROM eqrental r LEFT JOIN equipment e ON r.eq_id=e.eq_id
+		where r.eq_staff_id is not null
+	</select>
+	<select id="selectAllEqreturn" resultType="EqreturnTemp">
+		SELECT
+		r.eq_return_id,r.eq_return_date,r.eq_exam_state,e.eq_name,r.eq_user_id
+		FROM eqreturn r LEFT JOIN equipment e ON r.eq_id=e.eq_id
+		where r.eq_exam_state ='未审核'
+	</select>
+	<select id="selectAllEqreturnIsDone" resultType="EqreturnTemp">
+		SELECT
+		r.eq_return_id,r.eq_return_date,r.eq_exam_state,e.eq_name,r.eq_user_id
+		FROM eqreturn r LEFT JOIN equipment e ON r.eq_id=e.eq_id
+		where r.eq_exam_state != '未审核'
+	</select>
+
+	<update id="setRental" parameterType="java.lang.String">
+		UPDATE eqrental set eq_isreturn=1 where eq_lease_id = #{v}
+	</update>
+	<update id="updateEq" parameterType="Equipment">
+		UPDATE equipment set
+		eq_name=#{eqName},eq_warehouse_id=#{eqWarehouseId},eq_class_id=#{eqClassId}
+		where eq_id = #{eqId}
+	</update>
+	<update id="updateEqCount">
+		UPDATE equipment set eq_surplus=eq_surplus-#{1}
+		where eq_id = #{0}
+	</update>
+	<update id="updateEqSpend" parameterType="Equipmentspend">
+		UPDATE equipmentspend set
+		eq_deposit=#{eq_deposit},eq_price=#{eq_price},eq_overdue=#{eq_overdue},eq_damage=#{eq_damage},eq_lose=#{eq_lose}
+		where eq_id = #{eq_id}
+	</update>
+	<update id="updateEqWare" parameterType="Eqwarehouse">
+		UPDATE Eqwarehouse set
+		eq_warehouse_name=#{eq_warehouse_name},eq_warehouse_address=#{eq_warehouse_address}
+		where eq_warehouse_id = #{eq_warehouse_id}
+	</update>
+	<update id="updateEqClass" parameterType="Eqclass">
+		UPDATE eqclass set eq_class_name=#{eqClassName}
+		where eq_class_id = #{eqClassId}
+	</update>
+	<update id="updateEqmaintain">
+		UPDATE eqmaintain set eq_maincount=eq_maincount+#{1}
+		where eq_id = #{0}
+	</update>
+	<update id="dealEqlease">
+		UPDATE eqrental set eq_staff_id=#{1}
+		where eq_lease_id = #{0}
+	</update>
+	<insert id="insertReturn" parameterType="Eqrental">
+		insert into
+		eqreturn(eq_return_id,eq_id,eq_return_date,eq_exam_state,eq_user_id)
+		values(#{eq_lease_id},#{eq_id},#{eq_date_return},'未审核',#{eq_user_id})
+	</insert>
+	<insert id="addEqexamine" parameterType="Eqexamine">
+		insert into
+		eqexamine(eq_ex_id,eq_id,eq_staff_id,eq_overdue,eq_num_damage,eq_num_lose,eq_publish)
+		values(#{eq_ex_id},#{eq_id},#{eq_staff_id},#{eq_overdue},#{eq_num_damage},#{eq_num_lose},#{eq_publish})
+	</insert>
+	<select id="selectAllWarehouse" resultType="Eqwarehouse">
+		SELECT * FROM eqwarehouse
+	</select>
+	<select id="selectEqwareByPrimaryKey" parameterType="java.lang.Integer"
+		resultType="Eqwarehouse">
+		SELECT * FROM eqwarehouse WHERE eq_warehouse_id = #{v}
+	</select>
+	<select id="selectEqmaintainById" parameterType="java.lang.Integer"
+		resultType="Eqmaintain">
+		SELECT * FROM eqmaintain WHERE eq_id = #{v}
+	</select>
+	<select id="getEqreturnById" parameterType="java.lang.String"
+		resultType="Eqreturn">
+		SELECT * FROM eqreturn WHERE eq_return_id = #{v}
+	</select>
+	<select id="getEqreCount" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		SELECT eq_count FROM eqrental WHERE eq_lease_id = #{v}
+	</select>
+	<select id="getEqexamine" parameterType="java.lang.String"
+		resultType="Eqexamine">
+		SELECT * FROM eqexamine WHERE eq_ex_id = #{v}
+	</select>
+	<select id="findMaxID" resultType="java.lang.Integer">
+		SELECT MAX(eq_id) FROM equipment
+	</select>
+	<insert id="addEqWare" parameterType="Eqwarehouse">
+		insert into eqwarehouse ( eq_warehouse_name,eq_warehouse_address)
+		values (#{eq_warehouse_name}, #{eq_warehouse_address})
+	</insert>
+	<insert id="addEqClass" parameterType="Eqclass">
+		insert into eqclass ( eq_class_name)
+		values (#{eqClassName})
+	</insert>
+	<insert id="addEqmaintain" parameterType="Eqclass">
+		insert into eqmaintain (eq_id,eq_name,eq_maincount)
+		values (#{0},#{1},#{2})
+	</insert>
+	<insert id="addNewEq" parameterType="Equipment">
+		insert into equipment
+		(eq_name,eq_warehouse_id,eq_class_id,eq_amount,eq_surplus)
+		values (#{eqName},#{eqWarehouseId},#{eqClassId},#{eqAmount},#{eqAmount})
+
+	</insert>
+	<insert id="addEquipmentspend" parameterType="Equipmentspend">
+		insert into equipmentspend
+		(eq_id,eq_name,eq_deposit,eq_price,eq_overdue,eq_damage,eq_lose)
+		values
+		(#{eq_id},#{eq_name},#{eq_deposit},#{eq_price},#{eq_overdue},#{eq_damage},#{eq_lose})
+	</insert>
+	<delete id="deleteEqmaintain" parameterType="java.lang.Integer">
+		delete from eqmaintain where eq_id = #{v}
+	</delete>
+	<update id="deleteEquipment">
+		update Equipment set eq_amount=eq_amount-#{1},eq_surplus=eq_surplus-#{1}
+		where eq_id = #{0}
+	</update>
+	<update id="updateEqreturnToExam" parameterType="java.lang.String">
+		update Eqreturn set eq_exam_state='已审核'
+		where eq_return_id = #{v}
+	</update>
 </mapper>

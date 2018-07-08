@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>layout 后台大布局 - Layui</title>
+  <title>公告板</title>
   <link rel="stylesheet" href="${pageContext.request.contextPath }/layui/css/layui.css">
 </head>
 <body class="layui-layout-body">
@@ -20,9 +20,10 @@
 			      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
 			      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
 			        <li class="layui-nav-item"><a  href="#">体育馆管理员控制台</a></li>
-					<li class="layui-nav-item"><a href="${pageContext.request.contextPath }/ordinary_userList_body.jsp" >普通用户</a></li>
-			        <li class="layui-nav-item"><a href="${pageContext.request.contextPath }/gym_userList_body.jsp" >管理员用户</a></li>
-			        <li class="layui-nav-item"><a href="${pageContext.request.contextPath }/call_board.jsp" class="layui-this" >发布公告</a></li>
+					<li class="layui-nav-item"><a href="${pageContext.request.contextPath }/html/ltc_gymManage/ordinary_userList_body.jsp" >普通用户</a></li>
+			        <li class="layui-nav-item"><a href="${pageContext.request.contextPath }/html/ltc_gymManage/gym_userList_body.jsp" >管理员用户</a></li>
+			        <li class="layui-nav-item"><a href="${pageContext.request.contextPath }/html/ltc_gymManage/call_board.jsp" class="layui-this" >发布公告</a></li>
+			        <li class="layui-nav-item"><a href="${pageContext.request.contextPath }/ltc_tologin.action?username=${manage.controllerID }&userType=manage&password=${manage.password }" >返回管理页面</a></li>
 			      </ul>
 			    </div>
   		</div>
@@ -51,11 +52,13 @@
 		                  <colgroup>
 		                      <col>
 		                      <col width="200">
+		                      <col>
 		                  </colgroup>
 		                  <thead>
 		                      <tr>
 		                      <th>最新公告</th>
 		                      <th>发布时间</th>
+		                      <th>操作</th>
 		                      </tr> 
 		                  </thead>
 		                  <tbody>
@@ -63,6 +66,14 @@
 		                        <tr>
 		                        <td>${anno.anno }</td>
 		                        <td>${anno.createTime }</td>
+		                        <td class="text-center">
+			                        <div class="layui-btn-group">
+			                          <button class="layui-btn layui-btn-sm layui-btn-primary dw-delete" 
+			                          onclick="window.location.href='${pageContext.request.contextPath }/ltc_anno_delete.action?id=${anno.id }'">
+			                            <i class="layui-icon">&#xe640;</i>删除
+			                          </button>
+			                        </div>
+		                      	</td>
 		                        </tr>
 		                       </c:forEach>
 		                  </tbody>

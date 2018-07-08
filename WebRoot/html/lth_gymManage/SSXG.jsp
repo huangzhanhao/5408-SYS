@@ -25,10 +25,10 @@
 			      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
 			      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
 			        <li class="layui-nav-item"><a  href="#">賽事管理</a></li>
-			        <li class="layui-nav-item"><a href="SSCX.jsp" >赛事查询</a></li>
-			        <li class="layui-nav-item"><a href="SSXG.jsp" class="layui-this" >赛事修改</a></li>
-			        <li class="layui-nav-item"><a href="SSSH.jsp"  >赛事审核</a></li>
-		
+			        <li class="layui-nav-item"><a href="${pageContext.request.contextPath }/html/lth_gymManage/SSCX.jsp" >赛事查询</a></li>
+			        <li class="layui-nav-item"><a href="${pageContext.request.contextPath }/html/lth_gymManage/SSXG.jsp" class="layui-this" >赛事修改</a></li>
+			        <li class="layui-nav-item"><a href="${pageContext.request.contextPath }/html/lth_gymManage/SSSH.jsp"  >赛事审核</a></li>
+					
 			      </ul>
 			    </div>
   		</div>

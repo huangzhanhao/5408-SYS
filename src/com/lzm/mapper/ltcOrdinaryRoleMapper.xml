@@ -1,24 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.lzm.mapper.ltcOrdinaryRoleMapper" >
+<mapper namespace="com.lzm.mapper.ltcOrdinaryRoleMapper">
 
-	<insert id="addRole" parameterType="ltcOrdinaryRole">  
-        insert into ltc_ordinary_role(username,studentID,password,grade,college,sex) values(#{username},#{studentID},#{password},#{grade},#{college},#{sex})  
-    </insert> 
-    
-    <select id="queryOrdinaryRole" resultType="ltcOrdinaryRole">
-         select username,studentID,grade,college from ltc_ordinary_role
-     </select>
-     
-     <select id="queryManageRole" resultType="ltcManageRole">
-         select username,controllerID,status,regTime,contactWay,remarks from ltc_manage_role
-     </select>
-     
-     <insert id="addAnno" parameterType="callBoard">  
-        insert into call_board(anno) values(#{anno})  
-    </insert>
-    
-    <select id="queryAnno" resultType="callBoard">
-         select anno,createTime from call_board
-     </select>
+	<insert id="addRole" parameterType="ltcOrdinaryRole">
+		insert into ltc_ordinary_role(username,studentID,password,grade,college,sex)
+		values(#{username},#{studentID},#{password},#{grade},#{college},#{sex})
+	</insert>
+
+	<insert id="addManageRole" parameterType="ltcManageRole">
+		insert into
+		ltc_manage_role(username,controllerID,password,status,regTime,contactWay,remarks,sex)
+		values(#{username},#{controllerID},#{password},#{status},#{regTime},#{contactWay},#{remarks},#{sex})
+	</insert>
+
+	<select id="queryOrdinaryRole" resultType="ltcOrdinaryRole">
+		select username,studentID,password,grade,college from ltc_ordinary_role
+	</select>
+
+	<select id="queryManageRole" resultType="ltcManageRole">
+		select username,controllerID,password,status,regTime,contactWay,remarks from
+		ltc_manage_role
+	</select>
+
+	<insert id="addAnno" parameterType="callBoard">
+		insert into call_board(anno) values(#{anno})
+	</insert>
+
+	<select id="queryAnno" resultType="callBoard">
+		select id,anno,createTime from call_board
+	</select>
+
+	<delete id="deleteAnno" parameterType="java.lang.Integer">
+		delete from call_board where id=#{id}
+	</delete>
+
+	<delete id="deleteOrdinaryRole" parameterType="java.lang.String">
+		delete from ltc_ordinary_role where studentID=#{studentID}
+	</delete>
+
+	<delete id="deleteManageRole" parameterType="java.lang.String">
+		delete from ltc_manage_role where controllerID=#{controllerID}
+	</delete>
+
+	<select id="queryByIDOrdinaryRole" resultType="ltcOrdinaryRole"
+		parameterType="java.lang.String">
+		select username,studentID,password,grade,college,sex from ltc_ordinary_role
+		where studentID=#{studentID}
+	</select>
+
+	<select id="queryByIDManageRole" resultType="ltcManageRole"
+		parameterType="java.lang.String">
+		select username,controllerID,password,status,regTime,contactWay,remarks from
+		ltc_manage_role where controllerID=#{controllerID}
+	</select>
+
+	<update id="updateOrdinaryRole" parameterType="ltcOrdinaryRole">
+		update ltc_ordinary_role
+		set ltc_ordinary_role.username = #{username},
+		ltc_ordinary_role.grade = #{grade},
+		ltc_ordinary_role.college = #{college},
+		ltc_ordinary_role.sex = #{sex}
+		where ltc_ordinary_role.studentID = #{studentID};
+	</update>
+
+	<update id="updateOrdinaryRolePassword" parameterType="java.lang.String">
+		update ltc_ordinary_role
+		set ltc_ordinary_role.password = #{0}
+		where ltc_ordinary_role.studentID = #{1};
+	</update>
+
+	<update id="updateManageRole" parameterType="ltcManageRole">
+		update ltc_manage_role
+		set ltc_manage_role.username = #{username},
+		ltc_manage_role.controllerID = #{controllerID},
+		ltc_manage_role.password = #{password},
+		ltc_manage_role.status = #{status},
+		ltc_manage_role.regTime = #{regTime},
+		ltc_manage_role.contactWay = #{contactWay},
+		ltc_manage_role.remarks = #{remarks}
+		where ltc_manage_role.controllerID = #{controllerID};
+	</update>
+
+	<select id="querySuperRole" resultType="ltcSuperRole">
+		select account,password,createTime from ltc_super_role
+	</select>
+
+	<insert id="addSuperRole" parameterType="ltcSuperRole">
+		insert into ltc_super_role(account,password,createTime)
+		values(#{account},#{password},#{createTime})
+	</insert>
+
+	<delete id="deleteSuperRole" parameterType="java.lang.String">
+		delete from ltc_super_role where account=#{account}
+	</delete>
 </mapper>

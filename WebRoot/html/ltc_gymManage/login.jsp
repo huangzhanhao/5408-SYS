@@ -36,9 +36,9 @@
                     <input type="password" lay-verify="required" name="password" autocomplete="off" placeholder="这里输入密码" class="layui-input" lay-verType="tips">
                 </div>
                 <div>
-                    <input type="radio" name="userType" id="A" value="A" class="radio-choice-box">普通用户
-                    <input type="radio" name="userType" id="B" value="B" class="radio-choice-box">管理员<br>
-                    <input type="radio" name="userType" id="C" value="C" class="radio-choice-box">超级管理员
+                    <input type="radio" name="userType" value="ordinary" class="radio-choice-box">普通用户
+                    <input type="radio" name="userType" value="manage" class="radio-choice-box">管理员<br>
+                    <input type="radio" name="userType" value="super" class="radio-choice-box">超级管理员
                 </div>
                 <div class="layui-form-item">
                     <div class="beg-pull">

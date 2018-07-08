@@ -8,11 +8,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>layout 后台大布局 - Layui</title>
   <link rel="stylesheet" href="${pageContext.request.contextPath }/layui/css/layui.css">
-  <style>
-  #display{
-  	display:block;
-  }
-  </style>
 </head>
 <body class="layui-layout-body">
 
@@ -25,9 +20,10 @@
 			      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
 			      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
 			        <li class="layui-nav-item"><a  href="#">体育馆管理员控制台</a></li>
-			        <li class="layui-nav-item"><a href="ordinary_userList_body.jsp" >普通用户</a></li>
-			        <li class="layui-nav-item"><a href="gym_userList_body.jsp" class="layui-this" >管理员用户</a></li>
-			        <li class="layui-nav-item"><a href="call_board.jsp" >发布公告</a></li>
+			        <li class="layui-nav-item"><a href="${pageContext.request.contextPath }/html/ltc_gymManage/ordinary_userList_body.jsp" >普通用户</a></li>
+			        <li class="layui-nav-item"><a href="${pageContext.request.contextPath }/html/ltc_gymManage/gym_userList_body.jsp" class="layui-this" >管理员用户</a></li>
+			        <li class="layui-nav-item"><a href="${pageContext.request.contextPath }/html/ltc_gymManage/call_board.jsp" >发布公告</a></li>
+			        <li class="layui-nav-item"><a href="${pageContext.request.contextPath }/ltc_tologin.action?username=${manage.controllerID }&userType=manage&password=${manage.password }" >返回管理页面</a></li>
 			      </ul>
 			    </div>
   		</div>
@@ -74,26 +70,6 @@
                 </table>
             </div>
         </fieldset>
-        <fieldset class="layui-elem-field">
-          <legend>控制台-最新公告</legend>
-          <div class="layui-field-box">
-              <table class="layui-table">
-                  <colgroup>
-                      <col>
-                  </colgroup>
-                  <thead>
-                      <tr>
-                      <th>最新公告</th>
-                      </tr> 
-                  </thead>
-                  <tbody>
-                      <tr>
-                      <td>于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…</td>
-                      </tr>
-                  </tbody>
-              </table>
-          </div>
-      </fieldset>
     </div>
     </div>
     <div class="layui-footer">

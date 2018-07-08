@@ -20,22 +20,22 @@ public interface fieldModuleService {
 
 	// 管理员删除场地信息
 	public void deleteFieldService(int idfield);
-	
+
 	// 管理员查看场地受损记录
 	public List<field_damage> getFieldDamageListService();
-	
+
 	// 管理员新增场地受损记录
 	public void addFieldDamageService(field_damage field_damage);
-	
+
 	// 管理员修改场地受损记录
 	public void editFieldDamageService(field_damage field_damage);
-	
+
 	// 管理员删除场地受损信息
 	public void deleteFieldDamageService(int idfield_damage);
 
 	// 管理员查看场地的订单记录
 	public List<field_order> getFieldOrderListService();
-	
-	//用户预约场地
+
+	// 用户预约场地
 	public void reserveFieldService(field_order field_order);
 }

@@ -8,6 +8,13 @@
 </head>
 <body>
 	<button onclick="${pageContext.request.contextPath }/ltc_ordinary_query.action">测试查询普通用户</button>
+<<<<<<< HEAD
+	<a href="${pageContext.request.contextPath }/ltc_ordinary_query.action">测试查询普通用户</a>
+	<a href="${pageContext.request.contextPath }/html/ltc_gymManage/update_ordinary_rolePassword.jsp?studentID=123">跳转到修改密码</a>
+	欢迎你，<span>${userList.username }</span><span>${userList.password}</span>
+	<a href="${pageContext.request.contextPath }/ltc_ordinary_queryByIDInHomepage.action?studentID=${userList.studentID}">测试查询普通用户</a>
+=======
 	<a href="${pageContext.request.contextPath }/query.action">测试查询普通用户</a>
+>>>>>>> branch 'master' of https://github.com/cenmen/5408-SYS.git
 </body>
 </html>

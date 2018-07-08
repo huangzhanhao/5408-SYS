@@ -9,8 +9,9 @@
 	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
 
 
-	<context:property-placeholder location="classpath:db.properties"/>
-	
+	<context:property-placeholder location="classpath:db.properties" />
+
+
 	<!-- 数据库连接池 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
@@ -21,28 +22,30 @@
 		<property name="maxActive" value="10" />
 		<property name="maxIdle" value="5" />
 	</bean>
-	
+
 	<!-- Mybatis的工厂 -->
 	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource"/>
+		<property name="dataSource" ref="dataSource" />
 		<!-- 核心配置文件的位置 -->
-		<property name="configLocation" value="classpath:sqlMapConfig.xml"/>
+		<property name="configLocation" value="classpath:sqlMapConfig.xml" />
 	</bean>
-	
 
+	<bean id="sysUserServiceImp" class="com.lzm.service.equipmentServiceImpl"></bean>
 
-	<!-- Mapper动态代理开发   扫描 -->
+	<!-- Mapper动态代理开发 扫描 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<!-- 基本包 -->
-		<property name="basePackage" value="com.lzm.mapper"/>
+		<property name="basePackage" value="com.lzm.mapper" />
 	</bean>
-	
+
 	<!-- 注解事务 -->
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource"/>
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
 	</bean>
-	
+
 	<!-- 开启注解 -->
-	<tx:annotation-driven transaction-manager="transactionManager"/>
-	
+	<tx:annotation-driven transaction-manager="transactionManager"
+		proxy-target-class="true" />
+
 </beans>

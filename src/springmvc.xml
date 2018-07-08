@@ -7,20 +7,21 @@
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
-        
-        
-        <!-- 扫描@Controler  @Service   -->
-        <context:component-scan base-package="com.lzm"/>
-        
-        <!-- 处理器映射器 -->
-<!--         <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/> -->
-        <!-- 处理器适配器 -->
-<!--         <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/> -->
-        <!-- 注解驱动 -->
-        <mvc:annotation-driven  />
-        <!-- 视图解释器 -->
-        <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        	<property name="suffix" value=".jsp"/>
-        </bean>
-        
-   </beans>
+
+
+	<!-- 扫描@Controler @Service -->
+	<context:component-scan base-package="com.lzm" />
+
+	<!-- 处理器映射器 -->
+	<!-- <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/> -->
+	<!-- 处理器适配器 -->
+	<!-- <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/> -->
+	<!-- 注解驱动 -->
+	<mvc:annotation-driven />
+	<!-- 视图解释器 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+</beans>

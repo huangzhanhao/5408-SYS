@@ -18,9 +18,10 @@
 			      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
 			      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
 			        <li class="layui-nav-item"><a  href="#">体育馆管理员控制台</a></li>
-			        <li class="layui-nav-item"><a href="ordinary_userList_body.jsp"  class="layui-this" >普通用户</a></li>
-			        <li class="layui-nav-item"><a href="gym_userList_body.jsp" >管理员用户</a></li>
-			        <li class="layui-nav-item"><a href="call_board.jsp" >发布公告</a></li>
+			        <li class="layui-nav-item"><a href="${pageContext.request.contextPath }/html/ltc_gymManage/ordinary_userList_body.jsp"  class="layui-this" >普通用户</a></li>
+			        <li class="layui-nav-item"><a href="${pageContext.request.contextPath }/html/ltc_gymManage/gym_userList_body.jsp" >管理员用户</a></li>
+			        <li class="layui-nav-item"><a href="${pageContext.request.contextPath }/html/ltc_gymManage/call_board.jsp" >发布公告</a></li>
+			      	<li class="layui-nav-item"><a href="${pageContext.request.contextPath }/ltc_tologin.action?username=${manage.controllerID }&userType=manage&password=${manage.password }" >返回管理页面</a></li>
 			      </ul>
 			    </div>
   		</div>

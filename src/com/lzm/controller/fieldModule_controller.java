@@ -104,12 +104,12 @@ public class fieldModule_controller {
 
 	// 删除场地受损记录
 	@RequestMapping("/delFieldDamageAction.action")
-	public String DelFieldDamageControl(int idfield_damage, Model model){
+	public String DelFieldDamageControl(int idfield_damage, Model model) {
 		System.out.println(idfield_damage);
 		fieldService.deleteFieldDamageService(idfield_damage);
 		return "/html/hzh_gymManage/FieldDamageList";
 	}
-	
+
 	// 查询所有订单
 	@RequestMapping("/QueryFieldOrderAction.action")
 	@ResponseBody
@@ -123,10 +123,10 @@ public class fieldModule_controller {
 		tableJSON.put("data", orderList);
 		return tableJSON;
 	}
-	
-	//用户预约场地
+
+	// 用户预约场地
 	@RequestMapping("/ReserveAction.action")
-	public String ReserveControl(field_order field_order,Model model){
+	public String ReserveControl(field_order field_order, Model model) {
 		field_order.setOrder_status("未支付");
 		System.out.println(field_order.toString());
 		fieldService.reserveFieldService(field_order);
